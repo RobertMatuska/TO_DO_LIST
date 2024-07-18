@@ -10,8 +10,8 @@ function Buttons() {
   const [detail, setDetail] = useState("");
 
   const allTodo = useSelector((state: any) => state.input.input);
-  const lastId = Math.max(allTodo.map((d: { index: any }) => d.index)) + 1;
 
+  const lastId = allTodo.length;
   const setNewTodo = () => {
     dispatch(newToDo(title, detail, lastId, "NEW"));
     setTitle("");
