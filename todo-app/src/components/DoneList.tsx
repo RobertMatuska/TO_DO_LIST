@@ -1,19 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import "../App.css";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteToDo } from "../redux/actions/actions";
+import { deleteToDo, sortTodosByTitleAscending, sortTodosByTitleDescending } from "../redux/actions/actions";
 
 function DoneList() {
   const dispatch = useDispatch();
   const allTodo = useSelector((state: any) => state.input.input);
+  const [sorted, setSorted] = useState(false);
 
   const onDeleteTodo = (id: any) => {
     dispatch(deleteToDo(id));
   };
-console.log("allTodo",allTodo)
+
+  const handleSort = () => {
+    if (sorted) {
+      setSorted(false);
+      dispatch(sortTodosByTitleAscending());
+    } else {
+      setSorted(true);
+      dispatch(sortTodosByTitleDescending());
+    }
+  };
+
+
   return (
     <div className="App">
       <h2 style={{ margin: "0px" }}>Done list</h2>
+      <button onClick={handleSort}>
+        {sorted ? "Sort ASC" : "Sort DESC"}
+      </button>
       {allTodo.map((todoDone: any) => (
         <p key={todoDone.index}>
           {todoDone.status === "DONE" ? (

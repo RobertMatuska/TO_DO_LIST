@@ -17,3 +17,11 @@ export const deleteToDo = (id: number) => ({
   type: "DELETE_TODO",
   payload: { id },
 });
+
+export const sortTodosByTitleAscending = () => ({
+  type: "SORT_TODO_BY_TITLE_ASC",
+});
+
+export const sortTodosByTitleDescending = () => ({
+  type: "SORT_TODO_BY_TITLE_DESC",
+});

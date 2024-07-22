@@ -9,11 +9,9 @@ function Buttons() {
   const [title, setTitle] = useState("");
   const [detail, setDetail] = useState("");
 
-  const allTodo = useSelector((state: any) => state.input.input);
-
-  const lastId = allTodo.length;
   const setNewTodo = () => {
-    dispatch(newToDo(title, detail, lastId, "NEW"));
+    const timestampLikeId = Date.now();
+    dispatch(newToDo(title, detail, timestampLikeId, "NEW"));
     setTitle("");
     setDetail("");
   };

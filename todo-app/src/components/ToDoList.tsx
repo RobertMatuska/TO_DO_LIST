@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../App.css";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteToDo, markToDoAsDone } from "../redux/actions/actions";
+import {
+  deleteToDo,
+  markToDoAsDone,
+  sortTodosByTitleAscending,
+  sortTodosByTitleDescending,
+} from "../redux/actions/actions";
 
 function ToDoList() {
   const dispatch = useDispatch();
   const allTodo = useSelector((state: any) => state.input.input);
+  const [sorted, setSorted] = useState(false);
 
   const onChangeStateToDone = (id: any) => {
     dispatch(markToDoAsDone(id));
@@ -15,10 +21,22 @@ function ToDoList() {
     dispatch(deleteToDo(id));
   };
 
+  const handleSort = () => {
+    if (sorted) {
+      setSorted(false);
+      dispatch(sortTodosByTitleAscending());
+    } else {
+      setSorted(true);
+      dispatch(sortTodosByTitleDescending());
+    }
+  };
+
   return (
     <div className="App">
       <h2 style={{ margin: "0px" }}>To Do list</h2>
-
+      <button onClick={handleSort}>
+        {sorted ? "Sort ASC" : "Sort DESC"}
+      </button>
       {allTodo.map((todo: any) => (
         <p key={todo.index}>
           {todo.status === "NEW" ? (
