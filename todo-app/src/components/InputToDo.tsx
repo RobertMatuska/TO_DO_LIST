@@ -1,13 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../App.css";
 import { useDispatch, useSelector } from "react-redux";
-import { newToDo } from "../redux/actions/actions";
+import { newToDo, searchedToDo } from "../redux/actions/actions";
 
 function Buttons() {
   const dispatch = useDispatch();
 
   const [title, setTitle] = useState("");
   const [detail, setDetail] = useState("");
+  const [searchedString, setSearchedString] = useState("");
+
+  useEffect(() => {
+    dispatch(searchedToDo(searchedString));
+  }, [searchedString]);
 
   const setNewTodo = () => {
     const timestampLikeId = Date.now();
@@ -36,10 +41,16 @@ function Buttons() {
           value={detail}
           onChange={(event) => setDetail(event.target.value)}
         />
-        <button className="save-button" onClick={() => setNewTodo()}>
+        <button className="button" onClick={() => setNewTodo()}>
           SAVE
         </button>
+        <br />
       </p>
+      <input
+        className="search-input"
+        onChange={(event) => setSearchedString(event.target.value)}
+        placeholder="SEARCH"
+      ></input>
     </div>
   );
 }

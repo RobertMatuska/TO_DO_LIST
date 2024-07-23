@@ -18,10 +18,26 @@ export const deleteToDo = (id: number) => ({
   payload: { id },
 });
 
-export const sortTodosByTitleAscending = () => ({
+export const sortTodosByTitleAscending = (allTodo: any, filteredToDo: any) => ({
   type: "SORT_TODO_BY_TITLE_ASC",
+  payload: {
+    allTodo,
+    filteredToDo,
+  },
 });
 
-export const sortTodosByTitleDescending = () => ({
+export const sortTodosByTitleDescending = (
+  allTodo: any,
+  filteredToDo: any
+) => ({
   type: "SORT_TODO_BY_TITLE_DESC",
+  payload: {
+    allTodo,
+    filteredToDo,
+  },
+});
+
+export const searchedToDo = (searchedString: string) => ({
+  type: "SEARCH_TODO",
+  payload: { searchedString },
 });

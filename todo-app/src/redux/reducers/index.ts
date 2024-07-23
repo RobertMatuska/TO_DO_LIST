@@ -36,28 +36,65 @@ const inputReducer = (state = initialState, action: any) => {
         input: updatedTodo,
       };
     case "SORT_TODO_BY_TITLE_ASC":
-      const sortedTodosASC: any = state?.input?.sort((a: any, b: any) => {
-        if (a.newTitle < b.newTitle) {
-          return 1;
-        } else {
-          return -1;
-        }
-      });
+      let sortedTodosASC: any = [];
+      action?.payload.filteredToDo.length > 0
+        ? (sortedTodosASC = action?.payload.filteredToDo?.sort(
+            (a: any, b: any) => {
+              if (a.newTitle > b.newTitle) {
+                return 1;
+              } else {
+                return -1;
+              }
+            }
+          ))
+        : (sortedTodosASC = action?.payload.allTodo?.sort((a: any, b: any) => {
+            if (a.newTitle > b.newTitle) {
+              return 1;
+            } else {
+              return -1;
+            }
+          }));
       return {
         ...state,
-        input: sortedTodosASC,
+        sorted: sortedTodosASC,
       };
+
     case "SORT_TODO_BY_TITLE_DESC":
-      const sortedTodosDESC: any = state?.input?.sort((a: any, b: any) => {
-        if (a.newTitle > b.newTitle) {
-          return 1;
-        } else {
-          return -1;
-        }
-      });
+      let sortedTodosDESC: any = [];
+      action?.payload.filteredToDo.length > 0
+        ? (sortedTodosDESC = action?.payload.filteredToDo?.sort(
+            (a: any, b: any) => {
+              if (a.newTitle < b.newTitle) {
+                return 1;
+              } else {
+                return -1;
+              }
+            }
+          ))
+        : (sortedTodosDESC = action?.payload.allTodo?.sort((a: any, b: any) => {
+            if (a.newTitle < b.newTitle) {
+              return 1;
+            } else {
+              return -1;
+            }
+          }));
       return {
         ...state,
-        input: sortedTodosDESC,
+        sorted: sortedTodosDESC,
+      };
+
+    case "SEARCH_TODO":
+      const searchedString = action?.payload?.searchedString;
+      const searchedToDo = state?.input?.filter((item: any) =>
+        item.newTitle
+          .toLowerCase()
+          .includes(action.payload.searchedString.toLowerCase())
+      );
+
+      return {
+        ...state,
+        searchedToDo: searchedString.length > 0 ? searchedToDo : [],
+        searchedString: searchedString,
       };
 
     default:

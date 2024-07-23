@@ -38,11 +38,28 @@
   background-color: rgb(222, 219, 219);
 }
 
-.save-button {
+.button {
   border-radius: 7px;
   height: 25px;
   width: 80px;
   background-color: rgb(222, 219, 219);
   border: 0px;
   cursor: pointer;
+}
+
+.search-button {
+  border-radius: 7px;
+  height: 25px;
+  width: 80px;
+  background-color: rgb(187, 182, 182);
+  border: 0px;
+  cursor: pointer;
+}
+
+.search-input {
+  border-radius: 7px;
+  height: 23px;
+  width: 180px;
+  background-color: rgb(222, 219, 219);
+  border: 0px;
 }
