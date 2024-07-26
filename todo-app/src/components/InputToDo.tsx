@@ -3,7 +3,7 @@ import "../App.css";
 import { useDispatch, useSelector } from "react-redux";
 import { newToDo, searchedToDo } from "../redux/actions/actions";
 
-function Buttons() {
+function InputToDo() {
   const dispatch = useDispatch();
 
   const [title, setTitle] = useState("");
@@ -55,4 +55,4 @@ function Buttons() {
   );
 }
 
-export default Buttons;
+export default InputToDo;

@@ -6,6 +6,7 @@ import {
   sortTodosByTitleAscending,
   sortTodosByTitleDescending,
 } from "../redux/actions/actions";
+import { Link } from "react-router-dom";
 
 function DoneList() {
   const dispatch = useDispatch();
@@ -41,7 +42,7 @@ function DoneList() {
                 border: "gray solid 2px",
                 marginLeft: "20px",
                 minHeight: "120px",
-                maxWidth: "260px",
+                maxWidth: "290px",
               }}
             >
               <p style={{ margin: "0px", fontWeight: "bold" }}>
@@ -52,10 +53,15 @@ function DoneList() {
               </p>
 
               <p style={{ margin: "0px" }}>
-                <button>Edit</button>
+              <Link to={`/edit/${todoDone.index}`}>
+                     
+                     <button className="button">Edit</button>
+                   </Link>
+
                 <button
                   style={{ marginLeft: "20px" }}
                   onClick={() => onDeleteTodo(todoDone.index)}
+                  className="button"
                 >
                   Delete
                 </button>

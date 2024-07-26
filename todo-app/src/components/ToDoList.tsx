@@ -7,6 +7,8 @@ import {
   sortTodosByTitleAscending,
   sortTodosByTitleDescending,
 } from "../redux/actions/actions";
+import { Link } from "react-router-dom";
+import EditToDo from "./EditToDo";
 
 function ToDoList() {
   const dispatch = useDispatch();
@@ -48,7 +50,7 @@ function ToDoList() {
                     border: "gray solid 2px",
                     marginLeft: "20px",
                     minHeight: "120px",
-                    maxWidth: "260px",
+                    maxWidth: "290px",
                   }}
                   id={todo.index}
                 >
@@ -59,15 +61,21 @@ function ToDoList() {
                     {todo.newDetail}
                   </p>
                   <p style={{ margin: "0px" }}>
-                    <button>Edit</button>
+                    <Link to={`/edit/${todo.index}`}>
+                     
+                      <button className="button">Edit</button>
+                    </Link>
+
                     <button
                       style={{ marginLeft: "20px" }}
+                      className="button"
                       onClick={() => onDeleteTodo(todo.index)}
                     >
                       Delete
                     </button>
                     <button
                       id={todo.index}
+                      className="button"
                       style={{ marginLeft: "20px" }}
                       onClick={() => onChangeStateToDone(todo.index)}
                     >
@@ -88,7 +96,7 @@ function ToDoList() {
                     border: "gray solid 2px",
                     marginLeft: "20px",
                     minHeight: "120px",
-                    maxWidth: "260px",
+                    maxWidth: "290px",
                   }}
                   id={todo.index}
                 >
@@ -103,6 +111,7 @@ function ToDoList() {
                     <button
                       style={{ marginLeft: "20px" }}
                       onClick={() => onDeleteTodo(todo.index)}
+                      className="button"
                     >
                       Delete
                     </button>
@@ -110,6 +119,7 @@ function ToDoList() {
                       id={todo.index}
                       style={{ marginLeft: "20px" }}
                       onClick={() => onChangeStateToDone(todo.index)}
+                      className="button"
                     >
                       Done
                     </button>
