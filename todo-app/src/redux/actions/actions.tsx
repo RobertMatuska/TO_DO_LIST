@@ -5,7 +5,7 @@ export const newToDo = (
   status: string
 ) => ({
   type: "NEW_TODO",
-  payload: { title, detail, index, status },
+  payload: { title, detail, index, status, searchedToDo: [] },
 });
 
 export const markToDoAsDone = (id: number) => ({

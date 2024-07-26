@@ -6,11 +6,8 @@ import { Provider } from "react-redux";
 import store from "./redux/store";
 import {
   BrowserRouter,
-  createBrowserRouter,
   Route,
-  RouterProvider,
   Routes,
-  useParams,
 } from "react-router-dom";
 import EditToDo from "./components/EditToDo";
 

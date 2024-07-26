@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "../App.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -13,6 +13,7 @@ function ToDoList() {
   const dispatch = useDispatch();
   const allTodo = useSelector((state: any) => state.input.input);
   const filteredToDo = useSelector((state: any) => state.input.searchedToDo);
+  const searchString = useSelector((state: any) => state.input.searchedString);
 
   const [sorted, setSorted] = useState(false);
 
@@ -33,6 +34,7 @@ function ToDoList() {
       dispatch(sortTodosByTitleDescending(allTodo, filteredToDo));
     }
   };
+
   console.log("allTodo", allTodo);
   return (
     <div className="App">
@@ -40,7 +42,7 @@ function ToDoList() {
       <button className="button" onClick={handleSort}>
         {sorted ? "Sort ASC" : "Sort DESC"}
       </button>
-      {filteredToDo?.length === 0
+      {!searchString && filteredToDo?.length === 0
         ? allTodo?.map((todo: any) => (
             <p key={todo.index}>
               {todo.status === "NEW" ? (
@@ -50,6 +52,7 @@ function ToDoList() {
                     marginLeft: "20px",
                     minHeight: "120px",
                     maxWidth: "290px",
+                    backgroundColor: "#DDD76A",
                   }}
                   id={todo.index}
                 >
@@ -63,7 +66,6 @@ function ToDoList() {
                     <Link to={`/edit/${todo.index}`}>
                       <button className="button">Edit</button>
                     </Link>
-
                     <button
                       style={{ marginLeft: "20px" }}
                       className="button"
@@ -95,6 +97,7 @@ function ToDoList() {
                     marginLeft: "20px",
                     minHeight: "120px",
                     maxWidth: "290px",
+                    backgroundColor: "#DDD76A",
                   }}
                   id={todo.index}
                 >
@@ -105,7 +108,9 @@ function ToDoList() {
                     {todo.detail}
                   </p>
                   <p style={{ margin: "0px" }}>
-                    <button>Edit</button>
+                    <Link to={`/edit/${todo.index}`}>
+                      <button className="button">Edit</button>
+                    </Link>
                     <button
                       style={{ marginLeft: "20px" }}
                       onClick={() => onDeleteTodo(todo.index)}

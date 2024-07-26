@@ -2,6 +2,7 @@ import { combineReducers } from "redux";
 
 const initialState = {
   input: [],
+  searchedToDo: [],
 };
 
 const inputReducer = (state = initialState, action: any) => {
@@ -23,24 +24,37 @@ const inputReducer = (state = initialState, action: any) => {
       };
     case "DELETE_TODO":
       const updatedTodo: any[] = [];
-      state.input.map((todo: any) => {
-        const { id } = action.payload;
-        if (todo.index !== id) {
-          updatedTodo.push(todo);
-          return { updatedTodo };
-        }
-        return todo;
-      });
+      const searchedToDos = state;
+
+      searchedToDos?.searchedToDo.length > 0
+        ? state.searchedToDo.map((todo: any) => {
+            const { id } = action.payload;
+            if (todo.index !== id) {
+              updatedTodo.push(todo);
+              return { updatedTodo };
+            }
+            return todo;
+          })
+        : state.input.map((todo: any) => {
+            const { id } = action.payload;
+            if (todo.index !== id) {
+              updatedTodo.push(todo);
+              return { updatedTodo };
+            }
+            return todo;
+          });
+
       return {
         ...state,
         input: updatedTodo,
+        searchedToDo: updatedTodo,
       };
     case "SORT_TODO_BY_TITLE_ASC":
       let sortedTodosASC: any = [];
       action?.payload.filteredToDo.length > 0
         ? (sortedTodosASC = action?.payload.filteredToDo?.sort(
             (a: any, b: any) => {
-              if (a.Title > b.Title) {
+              if (a.title > b.title) {
                 return 1;
               } else {
                 return -1;
@@ -48,7 +62,7 @@ const inputReducer = (state = initialState, action: any) => {
             }
           ))
         : (sortedTodosASC = action?.payload.allTodo?.sort((a: any, b: any) => {
-            if (a.Title > b.Title) {
+            if (a.title > b.title) {
               return 1;
             } else {
               return -1;
@@ -64,7 +78,7 @@ const inputReducer = (state = initialState, action: any) => {
       action?.payload.filteredToDo.length > 0
         ? (sortedTodosDESC = action?.payload.filteredToDo?.sort(
             (a: any, b: any) => {
-              if (a.Title < b.Title) {
+              if (a.title < b.title) {
                 return 1;
               } else {
                 return -1;
@@ -72,7 +86,7 @@ const inputReducer = (state = initialState, action: any) => {
             }
           ))
         : (sortedTodosDESC = action?.payload.allTodo?.sort((a: any, b: any) => {
-            if (a.Title < b.Title) {
+            if (a.title < b.title) {
               return 1;
             } else {
               return -1;

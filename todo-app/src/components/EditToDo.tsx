@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "../App.css";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import Header from "./Header";
-import Buttons from "./InputToDo";
 import { editTodo } from "../redux/actions/actions";
 
 function EditToDo() {
@@ -31,6 +30,7 @@ function EditToDo() {
         <Link to={`/`}>
           <button className="button">GO HOME</button>{" "}
         </Link>
+        <br />
         <input
           className="input-button"
           name="myInput"
