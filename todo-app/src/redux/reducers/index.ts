@@ -40,7 +40,7 @@ const inputReducer = (state = initialState, action: any) => {
       action?.payload.filteredToDo.length > 0
         ? (sortedTodosASC = action?.payload.filteredToDo?.sort(
             (a: any, b: any) => {
-              if (a.newTitle > b.newTitle) {
+              if (a.Title > b.Title) {
                 return 1;
               } else {
                 return -1;
@@ -48,7 +48,7 @@ const inputReducer = (state = initialState, action: any) => {
             }
           ))
         : (sortedTodosASC = action?.payload.allTodo?.sort((a: any, b: any) => {
-            if (a.newTitle > b.newTitle) {
+            if (a.Title > b.Title) {
               return 1;
             } else {
               return -1;
@@ -64,7 +64,7 @@ const inputReducer = (state = initialState, action: any) => {
       action?.payload.filteredToDo.length > 0
         ? (sortedTodosDESC = action?.payload.filteredToDo?.sort(
             (a: any, b: any) => {
-              if (a.newTitle < b.newTitle) {
+              if (a.Title < b.Title) {
                 return 1;
               } else {
                 return -1;
@@ -72,7 +72,7 @@ const inputReducer = (state = initialState, action: any) => {
             }
           ))
         : (sortedTodosDESC = action?.payload.allTodo?.sort((a: any, b: any) => {
-            if (a.newTitle < b.newTitle) {
+            if (a.Title < b.Title) {
               return 1;
             } else {
               return -1;
@@ -86,7 +86,7 @@ const inputReducer = (state = initialState, action: any) => {
     case "SEARCH_TODO":
       const searchedString = action?.payload?.searchedString;
       const searchedToDo = state?.input?.filter((item: any) =>
-        item.newTitle
+        item.title
           .toLowerCase()
           .includes(action.payload.searchedString.toLowerCase())
       );
@@ -95,6 +95,23 @@ const inputReducer = (state = initialState, action: any) => {
         ...state,
         searchedToDo: searchedString.length > 0 ? searchedToDo : [],
         searchedString: searchedString,
+      };
+    case "EDIT_TODO":
+      const { index } = action.payload;
+      const editTodos = state.input.map((todo: any) => {
+        if (todo.index === index) {
+          return {
+            ...todo,
+            title: action.payload.title,
+            detail: action.payload.detail,
+            status: "NEW",
+          };
+        }
+        return todo;
+      });
+      return {
+        ...state,
+        input: editTodos,
       };
 
     default:

@@ -8,7 +8,6 @@ import {
   sortTodosByTitleDescending,
 } from "../redux/actions/actions";
 import { Link } from "react-router-dom";
-import EditToDo from "./EditToDo";
 
 function ToDoList() {
   const dispatch = useDispatch();
@@ -34,7 +33,7 @@ function ToDoList() {
       dispatch(sortTodosByTitleDescending(allTodo, filteredToDo));
     }
   };
-  console.log("filteredToDo", allTodo);
+  console.log("allTodo", allTodo);
   return (
     <div className="App">
       <h2 style={{ margin: "0px" }}>To Do list</h2>
@@ -55,14 +54,13 @@ function ToDoList() {
                   id={todo.index}
                 >
                   <p style={{ margin: "0px", fontWeight: "bold" }}>
-                    {todo.newTitle}
+                    {todo.title}
                   </p>
                   <p style={{ fontSize: "18px", margin: "0px" }}>
-                    {todo.newDetail}
+                    {todo.detail}
                   </p>
                   <p style={{ margin: "0px" }}>
                     <Link to={`/edit/${todo.index}`}>
-                     
                       <button className="button">Edit</button>
                     </Link>
 
@@ -101,10 +99,10 @@ function ToDoList() {
                   id={todo.index}
                 >
                   <p style={{ margin: "0px", fontWeight: "bold" }}>
-                    {todo.newTitle}
+                    {todo.title}
                   </p>
                   <p style={{ fontSize: "18px", margin: "0px" }}>
-                    {todo.newDetail}
+                    {todo.detail}
                   </p>
                   <p style={{ margin: "0px" }}>
                     <button>Edit</button>

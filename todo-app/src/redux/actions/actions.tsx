@@ -1,11 +1,11 @@
 export const newToDo = (
-  newTitle: string,
-  newDetail: string,
+  title: string,
+  detail: string,
   index: number,
   status: string
 ) => ({
   type: "NEW_TODO",
-  payload: { newTitle, newDetail, index, status },
+  payload: { title, detail, index, status },
 });
 
 export const markToDoAsDone = (id: number) => ({
@@ -40,4 +40,14 @@ export const sortTodosByTitleDescending = (
 export const searchedToDo = (searchedString: string) => ({
   type: "SEARCH_TODO",
   payload: { searchedString },
+});
+
+export const editTodo = (
+  index: any,
+  title: string,
+  detail: string,
+  status: string
+) => ({
+  type: "EDIT_TODO",
+  payload: { title, detail, index, status },
 });

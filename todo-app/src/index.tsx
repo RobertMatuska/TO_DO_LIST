@@ -18,13 +18,11 @@ const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 
-
 root.render(
   <Provider store={store}>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />} />
-
         <Route path="/edit/:todoId" element={<EditToDo />} />
       </Routes>
     </BrowserRouter>

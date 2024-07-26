@@ -46,17 +46,16 @@ function DoneList() {
               }}
             >
               <p style={{ margin: "0px", fontWeight: "bold" }}>
-                {todoDone.newTitle}
+                {todoDone.title}
               </p>
               <p style={{ fontSize: "18px", margin: "0px" }}>
-                {todoDone.newDetail}
+                {todoDone.detail}
               </p>
 
               <p style={{ margin: "0px" }}>
-              <Link to={`/edit/${todoDone.index}`}>
-                     
-                     <button className="button">Edit</button>
-                   </Link>
+                <Link to={`/edit/${todoDone.index}`}>
+                  <button className="button">Edit</button>
+                </Link>
 
                 <button
                   style={{ marginLeft: "20px" }}
